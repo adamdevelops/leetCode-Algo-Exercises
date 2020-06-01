@@ -21,17 +21,32 @@ Output: 3
 Explanation: The answer is "wke", with the length of 3.
              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 -----------------------------------------------------------------------------------------------------
-
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        dict = {}
+        stringLength = len(s)
 
-        for letter in s:
-            if letter in dict:
-                pass
+        subString = ""
+        substringLength = 0
+        longestString = 0
+        start = 0
+        nextltr = 1
+
+        subString += s[start]
+
+        while nextltr < stringLength:
+            if s[start] != s[nextltr]:
+                subString += s[nextltr]
+                substringLength = len(subString)
+                nextltr += 1
             else:
-                dict.update({letter: letter})
+                print('else')
+                longestString = substringLength
+                start += 1
+                nextltr += 1
+                subString = s[start]
+            print(substringLength)
+            print(subString)
 
-        print(dict)
+        longestString = len(subString)
 
-        return (len(dict))
+        return longestString
