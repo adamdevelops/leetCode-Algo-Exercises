@@ -23,30 +23,25 @@ Explanation: The answer is "wke", with the length of 3.
 -----------------------------------------------------------------------------------------------------
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        d = {}
+
         stringLength = len(s)
-
-        subString = ""
         substringLength = 0
-        longestString = 0
+        longest = 0
         start = 0
-        nextltr = 1
 
-        subString += s[start]
+        if s == "":
+            return 0
+        if len(s) == 1:
+            return 1
 
-        while nextltr < stringLength:
-            if s[start] != s[nextltr]:
-                subString += s[nextltr]
-                substringLength = len(subString)
-                nextltr += 1
+        for i in range(stringLength):
+            if s[i] not in d or d[s[i]] < start:
+                d[s[i]] = i
+                longest = max(longest, i-start + 1)
             else:
-                print('else')
-                longestString = substringLength
-                start += 1
-                nextltr += 1
-                subString = s[start]
-            print(substringLength)
-            print(subString)
+                start = d[s[i]] + 1
+                d[s[i]] = i
 
-        longestString = len(subString)
-
-        return longestString
+        print(d)
+        return longest
